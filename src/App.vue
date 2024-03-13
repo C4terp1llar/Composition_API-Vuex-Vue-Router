@@ -1,30 +1,77 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <nav class="navbar">
+    <h3>
+      Composition API
+    </h3>
+    <ul>
+      <li>
+        <router-link to="/">Все задачи</router-link>
+      </li>
+      <li>
+        <router-link to="/create">Создать</router-link>
+      </li>
+    </ul>
   </nav>
-  <router-view/>
+  <main class="content">
+    <router-view />
+  </main>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "@/res";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+body{
+  width: 100%;
+  height: 100%;
+  #app {
+    width: 100%;
+    height: 100vh;
+    @include flexbox(flex,unset,center,column);
+    background-color: $color3;
+    padding: $padding-large;
+    gap: $padding-medium;
+    .navbar{
+      width: 70%;
+      background-color: $color6;
+      border-radius: $radius;
+      padding: $padding-medium;
+      @include flexbox(flex,space-between,center,row);
+      ul{
+        @include flexbox();
+        gap: $padding-small;
+        list-style-type: none;
+        li{
+          a{
+            text-decoration: none;
+            color: black;
+          }
+          .active-link{
+            text-decoration: underline;
+          }
+        }
+      }
     }
+    .content{
+      width: 70%;
+      background-color: $color10;
+      border-radius: $radius;
+      padding: $padding-medium;
+      @include flexbox(flex,unset,unset ,column);
+      gap: $padding-small;
+    }
+  }
+  .temp-block{
+    width: 100%;
+    background-color: $color6;
+    border-radius: $radius;
+    padding: $padding-small;
   }
 }
 </style>
+<script setup>
+</script>
