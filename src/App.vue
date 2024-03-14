@@ -30,7 +30,7 @@ body{
   height: 100%;
   #app {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     @include flexbox(flex,unset,center,column);
     background-color: $color3;
     padding: $padding-large;

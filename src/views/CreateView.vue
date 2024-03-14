@@ -1,6 +1,7 @@
 <script>
 import {ref} from "vue";
 import {useStore} from 'vuex';
+import {useRouter} from "vue-router";
 
 export default {
   setup(){
@@ -8,18 +9,37 @@ export default {
     const date = ref('');
     const description = ref('');
 
-    const store = useStore()
-    console.log(store.state.tasks);
+    const store = useStore();
+    const router = useRouter();
     const submit = () => {
-      console.log(store.state.tasks);
-
+      if (!validDate()) return;
       store.commit('addTask', {
         title: title.value,
         date: date.value,
         description: description.value,
         status: 'active'
       });
+
+      title.value = '';
+      date.value = '';
+      description.value ='';
+
+      router.push('/');
     };
+
+    /*
+    * Валидация даты не очень красивая из-за алерта
+    *  не хочется заморачиваться с компонентой для алертов ошибок
+    * */
+    const validDate = () => {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().slice(0,10);
+      if(date.value < formattedDate){
+        alert('Выберите дату позже текущей');
+        return false;
+      }
+      return true
+    }
 
     return{
       title, date, description, submit
@@ -33,7 +53,7 @@ export default {
     <h2>Создать новую задачу</h2>
     <form @submit.prevent>
       <label for="title">Название</label>
-      <input type="text" id="title" v-model="title">
+      <input type="text" id="title" maxlength="45" v-model="title">
       <label for="date">Дедлайн</label>
       <input type="date" id="date" v-model="date">
       <label for="description">Описание</label>

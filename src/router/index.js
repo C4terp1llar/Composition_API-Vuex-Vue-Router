@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TasksView from "@/views/TasksView.vue";
 import CreateView from "@/views/CreateView.vue";
+import TaskDetails from "@/views/TaskDetails.vue";
 
 export default createRouter({
   history: createWebHistory(),
@@ -9,6 +10,7 @@ export default createRouter({
 
   routes: [
     {path: '/', component: TasksView},
-    {path: '/create', component: CreateView}
+    {path: '/create', component: CreateView},
+    {path: '/tasks/:id', component: TaskDetails}
   ]
 })
